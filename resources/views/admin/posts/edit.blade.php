@@ -18,13 +18,16 @@
                 </div>
 
                 <div class="mb-3">
-                    <label class="label-control" for="content">Contenutoo</label>
+                    <label class="label-control" for="content">Contenuto</label>
                     <textarea type="text" id="content" name="content" class="form-control"
                         rows="6">{{ $post->content }}</textarea>
                 </div>
                 <div>
                     <button class="btn btn-primary" type="submit">
                         invio
+                    </button>
+                    <button class="btn btn-secondary" type="reset">
+                        reset
                     </button>
                 </div>
             </form>

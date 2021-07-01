@@ -6,7 +6,7 @@
         @if (session('deleted'))
             <div class="alert alert-success" role="alert">
                 <strong>{{ session('deleted') }}</strong>
-                eliminata correttamente
+                <span>Dato eliminato correttamente</span>
             </div>
         @endif
         <table class="table">
