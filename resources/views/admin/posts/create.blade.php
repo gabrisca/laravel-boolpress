@@ -4,6 +4,7 @@
     <div class="container">
         <h1>
             Nuovo post
+            <span class="badge bg-danger rounded-pill">New</span>
         </h1>
 
         {{-- gestore degli errori: verifica l'esistenza di errori --}}
@@ -58,11 +59,13 @@
                 </div>
                 <div>
                     <button class="btn btn-primary" type="submit">
-                        invio
+                        INVIO
                     </button>
                     <button class="btn btn-secondary" type="reset">
-                        reset
+                        RESET
                     </button>
+                    <a class="btn btn-success" href="{{ route('admin.posts.index') }}">BACK</a>
+                </div>
             </form>
         </div>
     @endsection

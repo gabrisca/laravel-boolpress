@@ -50,11 +50,12 @@
                 </div>
                 <div>
                     <button class="btn btn-primary" type="submit">
-                        invio
+                        INVIO
                     </button>
                     <button class="btn btn-secondary" type="reset">
-                        reset
+                        RESET
                     </button>
+                    <a class="btn btn-success" href="{{ route('admin.posts.index') }}">BACK</a>
                 </div>
             </form>
         </div>

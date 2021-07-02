@@ -53,9 +53,8 @@ class PostsController extends Controller
         $counter = 0; // contatore iniziale
         while ($slug_exist) { // fintanto che esiste uno slug ne genero un altro. In questo modo evito che ci siano due slug uguali
             $title = $data['title'] . '-' . $counter;
-            $slug = Str::slug($title, '-');
-            $data['slug'] = $slug;
-            $slug_exist = Post::where('slug', $slug)->first();
+            $data['slug'] = Str::slug($title, '-');
+            $slug_exist = Post::where('slug', $data['slug'])->first();
             $counter++;
         }
 

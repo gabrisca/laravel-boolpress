@@ -17,7 +17,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th >ID</th>
+                    <th>ID</th>
                     <th>Title</th>
                     <th colspan="3">Actions</th>
                 </tr>
