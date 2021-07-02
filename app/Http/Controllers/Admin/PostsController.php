@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PostRequest; // PostRequest
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str; // importo l'helper delle stringhe per lo slug
@@ -37,11 +38,26 @@ class PostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
-        $data = $request->all();
+        // $request->validate([ //validazione dei dati inseriti
+        //     'title' => 'required|max:255|min:3', // title deve avere un minimi di 3 caratteri e un massimo di 255
+        //     'content' => 'required|min:3' // content deve avere almeno 3 caratteri
+        // ]);
+        // aggiunta poi in PostRequest
 
-        $data['slug'] = Str::slug($data['title'], '-'); // slug;
+
+        $data = $request->all();
+        $data['slug'] = Str::slug($data['title'], '-'); // Lo slug è una forma leggibile e valida per l’URL di un post o di una pagina web. Serve per la SEO
+        $slug_exist = Post::where('slug', $data['slug'])->first(); //cerca se esiste uno slug
+        $counter = 0; // contatore iniziale
+        while($slug_exist){ // fintanto che esiste uno slug ne genero un altro. In questo modo evito che ci siano due slug uguali
+            $title = $data['title'] . '-' . $counter;
+            $slug = Str::slug($title, '-');
+            $data['slug'] = $slug;
+            $slug_exist = Post::where('slug', $slug)->first();
+            $counter++;
+        }
 
         $new_post = new Post();
 
@@ -92,11 +108,28 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(PostRequest $request, Post $post)
     {
         $data = $request->all();
 
-        $data['slug'] = Str::slug($post->title, '-'); // slug;
+        if($post->title !== $data['title']){
+            $slug = Str::slug($data['title'], '-'); // Lo slug è una forma leggibile e valida per l’URL di un post o di una pagina web. Serve per la SEO
+            $slug_exist = Post::where('slug', $slug)->first(); //cerca se esiste uno slug
+            $counter = 0; // contatore iniziale
+            while($slug_exist){ // fintanto che esiste uno slug ne genero un altro. In questo modo evito che ci siano due slug uguali
+                $title = $data['title'] . '-' . $counter;
+                $slug = Str::slug($title, '-');
+                $data['slug'] = $slug;
+                $slug_exist = Post::where('slug', $slug)->first();
+                $counter++;
+            }
+        }else{
+            $data['slug'] = $post->slug;
+        }
+
+        // $data = $request->all();
+
+        // $data['slug'] = Str::slug($post->title, '-'); // slug;
 
         $post->update($data);
 
