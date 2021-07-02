@@ -17,7 +17,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts= Post::all();
+        $posts = Post::orderBy('id', 'desc')->paginate(5); // orderby 'desc' mostra l'ultimo fumetto inserito
         // dd($posts);
         return view('admin.posts.index', compact('posts'));
     }
@@ -51,7 +51,7 @@ class PostsController extends Controller
         $data['slug'] = Str::slug($data['title'], '-'); // Lo slug è una forma leggibile e valida per l’URL di un post o di una pagina web. Serve per la SEO
         $slug_exist = Post::where('slug', $data['slug'])->first(); //cerca se esiste uno slug
         $counter = 0; // contatore iniziale
-        while($slug_exist){ // fintanto che esiste uno slug ne genero un altro. In questo modo evito che ci siano due slug uguali
+        while ($slug_exist) { // fintanto che esiste uno slug ne genero un altro. In questo modo evito che ci siano due slug uguali
             $title = $data['title'] . '-' . $counter;
             $slug = Str::slug($title, '-');
             $data['slug'] = $slug;
@@ -78,7 +78,7 @@ class PostsController extends Controller
     {
         $post = Post::find($id);
 
-        if(!$post){
+        if (!$post) {
             abort(404);
         }
 
@@ -95,7 +95,7 @@ class PostsController extends Controller
     {
         $post = Post::find($id);
 
-        if(!$post){
+        if (!$post) {
             abort(404);
         }
         return view('admin.posts.edit', compact('post'));
@@ -112,18 +112,18 @@ class PostsController extends Controller
     {
         $data = $request->all();
 
-        if($post->title !== $data['title']){
+        if ($post->title !== $data['title']) {
             $slug = Str::slug($data['title'], '-'); // Lo slug è una forma leggibile e valida per l’URL di un post o di una pagina web. Serve per la SEO
             $slug_exist = Post::where('slug', $slug)->first(); //cerca se esiste uno slug
             $counter = 0; // contatore iniziale
-            while($slug_exist){ // fintanto che esiste uno slug ne genero un altro. In questo modo evito che ci siano due slug uguali
+            while ($slug_exist) { // fintanto che esiste uno slug ne genero un altro. In questo modo evito che ci siano due slug uguali
                 $title = $data['title'] . '-' . $counter;
                 $slug = Str::slug($title, '-');
                 $data['slug'] = $slug;
                 $slug_exist = Post::where('slug', $slug)->first();
                 $counter++;
             }
-        }else{
+        } else {
             $data['slug'] = $post->slug;
         }
 
