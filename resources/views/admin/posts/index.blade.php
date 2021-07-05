@@ -56,5 +56,19 @@
         <section>
             {{ $posts->links() }}
         </section>
+        @foreach ($categories as $category)
+             <h3>{{ $category->name }}</h3>
+             <div class="col">
+                 @forelse ($category->posts as $post_category)
+                     {{-- qui viene stampato quello che trovo --}}
+                     <div>
+                         <a href="{{ route('admin.posts.show', $post_category) }}">{{ $post_category->title }}</a>
+                     </div>
+                 @empty
+                     {{-- se non trovo nulla stampo quello che metto qui --}}
+                     <div>nessun post presente</div>
+                 @endforelse
+             </div>
+        @endforeach
     </div>
 @endsection
