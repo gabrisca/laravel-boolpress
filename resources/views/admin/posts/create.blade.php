@@ -37,21 +37,21 @@
                 </div>
 
                 <div class="mb-3">
-                    <label class="label-control" for="content">Categoria</label>
-                    <select class="form-control" name="category_id" id="category_id">
-                        <option value=""> seleziona una categoria </option>
-                        @foreach ($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}
-                                @if (old('category_id') == $category->id) selected
-                                @endif
-                            </option>
+                    <label class="label-control" for="category_id">Categoria</label>
+                    <select class="form-control @error('category_id') is-invalid @enderror"
+                    name="category_id" id="category_id">
+                        <option value=""> - selezionare una categoria - </option>
+                        @foreach($categories as $category)
+                            <option
+                            @if(old('category_id') == $category->id)  selected @endif
+                            value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach
                     </select>
                     @error('category_id')
-                        {{-- stampa un messaggio di errore --}}
-                        <div class="text-danger">{{ $message }}</div>
+                        <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
+
 
                 <div class="mb-3">
                     <label class="label-control" for="content">Contenuto</label>
@@ -67,6 +67,7 @@
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
+
                 <div>
                     <button class="btn btn-primary" type="submit">
                         INVIO

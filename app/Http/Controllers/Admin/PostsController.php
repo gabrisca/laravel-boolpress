@@ -20,6 +20,7 @@ class PostsController extends Controller
     {
         $posts = Post::orderBy('id', 'desc')->paginate(5); // orderby 'desc' mostra l'ultimo fumetto inserito
         // dd($posts);
+        $categories = Category::all();
         return view('admin.posts.index', compact('posts'));
     }
 
