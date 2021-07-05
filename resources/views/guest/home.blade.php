@@ -13,18 +13,19 @@
 
 <body>
     <div
-        style="background-image: url({{ asset('img/bg-2.jpg') }}); background-repeat: no-repeat; background-size: cover; height: 100vh;">
-        <div style="background-color:white" class="d-flex justify-content-between p-3">
+        style="background-image: url({{ asset('img/bg-2.jpg') }}); background-repeat: no-repeat; background-size: cover; height: 100vh;"
+    >
+        <div style="background-color:white" class="d-flex justify-content-between align-items-center p-1">
             <div class="d-flex justify-content-start">
                 <img style="height: 50px;" src="{{ asset('img/boolean-logo.jpg') }}" alt="">
                 <span style="font-size:2em">Boolpress</span>
             </div>
-            <div class="d-flex">
+            <div class="d-flex p-1">
                 <div class="nav-item">
-                    <a class="btn btn-primary" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    <a class="btn btn-primary btn-sm" href="{{ route('login') }}">{{ __('Login') }}</a>
                 </div>
                 <div class="nav-item">
-                    <a class="btn btn-outline-success" href="{{ route('register') }}">{{ __('Register') }}</a>
+                    <a class="btn btn-outline-success btn-sm" href="{{ route('register') }}">{{ __('Register') }}</a>
                 </div>
             </div>
         </div>
