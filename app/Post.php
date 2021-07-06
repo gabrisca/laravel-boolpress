@@ -23,4 +23,10 @@ class Post extends Model
     {
         return $this->belongsTo('App\Category');
     }
+
+    // creo la relazione ManyToMany tra entità Post ed endità Tag
+    public function tags()
+    {
+        return $this->belongsToMany('App\Tag');
+    }
 }

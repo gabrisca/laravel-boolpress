@@ -17,6 +17,12 @@
         <p>{{ $post->content }}</p>
 
         <div>
+            @foreach ($post->tags as $tag )
+                <span class="badge badge-primary">{{ $tag->name }}</span>
+            @endforeach
+        </div>
+
+        <div>
             <a class="btn btn-info" href="{{ route('admin.posts.edit', $post) }}">EDIT</a>
             <a class="btn btn-success" href="{{ route('admin.posts.index', $post) }}">BACK</a>
         </div>

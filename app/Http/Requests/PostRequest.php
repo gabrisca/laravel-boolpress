@@ -26,7 +26,8 @@ class PostRequest extends FormRequest
         return [
             'title' => 'required|max:255|min:3', // title deve avere un minimi di 3 caratteri e un massimo di 255
             'content' => 'required|min:3', // content deve avere almeno 3 caratteri
-            'category_id' => 'nullable|exists:categories,id'
+            'category_id' => 'nullable|exists:categories,id',
+            'tags' => 'nullable|exists:tags, id'
         ];
     }
 
@@ -39,7 +40,8 @@ class PostRequest extends FormRequest
             'title.min' => 'Devi inserire almeno :min caratteri',
             'content.required' => 'Contenuto è un campo obbligatorio',
             'content.min' => 'Devi inserire almeno :min caratteri',
-            'category_id.exists' => 'La categoria scelta non è presente'
+            'category_id.exists' => 'La categoria scelta non è presente',
+            'tags.exists' => 'Il tag scelto non è presente'
         ];
     }
 }

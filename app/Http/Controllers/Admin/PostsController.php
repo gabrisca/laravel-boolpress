@@ -6,6 +6,7 @@ use App\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest; // PostRequest
 use App\Post;
+use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str; // importo l'helper delle stringhe per lo slug
 
@@ -32,7 +33,8 @@ class PostsController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('admin.posts.create', compact('categories'));
+        $tags = Tag::all();
+        return view('admin.posts.create', compact('categories','tags'));
     }
 
     /**
@@ -51,6 +53,7 @@ class PostsController extends Controller
 
 
         $data = $request->all();
+        // dd($data);
         $data['slug'] = Str::slug($data['title'], '-'); // Lo slug è una forma leggibile e valida per l’URL di un post o di una pagina web. Serve per la SEO
         $slug_exist = Post::where('slug', $data['slug'])->first(); //cerca se esiste uno slug
         $counter = 0; // contatore iniziale
@@ -63,9 +66,15 @@ class PostsController extends Controller
 
         $new_post = new Post();
 
-        $new_post->fill($data); // scrive solo i dati fillable scritti nel model Comic
+        $new_post->fill($data); // scrive solo i dati fillable scritti nel model Post
 
         $new_post->save();
+
+        // verifico se esiste la chiave Tags nell'array $data | esiste solo se ho check del value in create.blade.php
+        if (array_key_exists('tags', $data)) {
+            // se esiste popolo la tabella pivot con la chiave del post e le chiavi dei tags
+            $new_post->tags()->attach($data['tags']);
+        }
 
         return redirect()->route('admin.posts.show', $new_post);
     }
@@ -96,12 +105,13 @@ class PostsController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
+        $tags = Tag::all();
         $categories = Category::all();
 
         if (!$post) {
             abort(404);
         }
-        return view('admin.posts.edit', compact('post', 'categories'));
+        return view('admin.posts.edit', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -135,6 +145,12 @@ class PostsController extends Controller
         // $data['slug'] = Str::slug($post->title, '-'); // slug;
 
         $post->update($data);
+
+        if(array_key_exists('tags', $data)){
+            $post->tags()->sync($data['tags']);
+        } else {
+            $post->tags()->detach();
+        }
 
         return redirect()->route('admin.posts.show', $post);
     }

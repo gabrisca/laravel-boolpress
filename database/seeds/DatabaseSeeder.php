@@ -11,9 +11,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // se volessi fare il seeder di tutte le classi
-        // $this->call([
-        //     PostsTableSeeder::class
-        // ]);
+        $this->call([
+            PostsTableSeeder::class,
+            CategoriesTableSeeder::class,
+            UpdatePostsSeeder::class,
+            TagsTableSeeder::class,
+        ]);
     }
 }

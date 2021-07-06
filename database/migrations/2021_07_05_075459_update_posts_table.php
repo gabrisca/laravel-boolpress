@@ -16,7 +16,7 @@ class UpdatePostsTable extends Migration
         Schema::table('posts', function (Blueprint $table) {
             // creo la colonna per il Foreign Key
             $table->unsignedBigInteger('category_id')->nullable()->after('id');
-            // setto la olonna per FK
+            // setto la colonna per FK
             $table->foreign('category_id')
             ->references('id') // in riferimento a id
             ->on('categories') // della tabella categories
