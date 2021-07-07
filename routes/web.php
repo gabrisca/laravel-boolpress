@@ -28,7 +28,11 @@ Route::prefix('admin')
     ->name('admin.')
     ->group(function(){
         // qui vanno inserite tutte le rotte admin (il nostro CRUD)
-        Route::get('/', 'HomeController@index')->name('home');
-        Route::resource('/posts', 'PostsController');
+        Route::get('/', 'HomeController@index')->name('home'); // rotta per il controller statico
+        Route::resource('/posts', 'PostsController'); // rotta per il controller dinamico
     })
 ;
+
+// Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');
