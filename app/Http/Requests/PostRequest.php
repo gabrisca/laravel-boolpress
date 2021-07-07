@@ -24,9 +24,10 @@ class PostRequest extends FormRequest
     public function rules()
     {
         return [
+            // inserisco le condizioni per le colonne title, content e category_id
             'title' => 'required|max:255|min:3', // title deve avere un minimi di 3 caratteri e un massimo di 255
             'content' => 'required|min:3', // content deve avere almeno 3 caratteri
-            'category_id' => 'nullable|exists:categories,id',
+            'category_id' => 'nullable|exists:categories,id', // nullable = non obbligatorio
             'tags' => 'nullable|exists:tags,id'
         ];
     }
