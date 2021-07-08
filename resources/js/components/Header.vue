@@ -20,6 +20,9 @@
                     <li class="nav-item">
                         <router-link class="nav-link" :to="{name: 'contacts'}">Contacts</router-link>
                     </li>
+                    <li>
+                        <a href="../"></a>
+                    </li>
                 </ul>
             </div>
         </nav>
@@ -34,4 +37,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="blog">
         <h1>Il mio Blog</h1>
         <div>
             <!-- loader -->
@@ -128,6 +128,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#blog {
+    height: 80vh;
+    }
 .custom-badge {
     display: inline-block;
     height: 2rem;

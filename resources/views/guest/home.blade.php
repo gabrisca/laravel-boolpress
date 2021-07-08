@@ -42,6 +42,15 @@
         </div>
     </div> --}}
 
+    <div class="d-flex justify-content-center p-1">
+        <div class="nav-item">
+            <a class="btn btn-primary btn-sm" href="{{ route('login') }}">{{ __('Login') }}</a>
+        </div>
+        <div class="nav-item">
+            <a class="btn btn-outline-success btn-sm" href="{{ route('register') }}">{{ __('Register') }}</a>
+        </div>
+    </div>
+
 </body>
 
 </html>
