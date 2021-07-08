@@ -15,6 +15,7 @@ import Error404 from './pages/Error404.vue';
 //creiamo la classe Router
 const router = new VueRouter({
     mode: 'history', // tiene in memoria la navigazione nel browser
+    linkExactActiveClass: 'active', // aggiunge una classe active personalizzata
     routes: [
         {
             path: '/',
