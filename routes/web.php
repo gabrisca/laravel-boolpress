@@ -13,13 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'PageController@index');
+// Route::get('/', 'PageController@index'); //sostituito a linea 37
 
 // rotte relative all'autenticazione
 // se Auth è sottolineato non preoccuparsi. Funziona ugualmente
 Auth::routes();
-// Auth::routes(['register'=>false]); impedisce il login
 
+// Auth::routes(['register'=>false]); impedisce il login
 // Route::get('/home', 'HomeController@index')->name('home');
 
 Route::prefix('admin')
@@ -33,6 +33,5 @@ Route::prefix('admin')
     })
 ;
 
-// Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');
+// tutte le altre rotte verranno gestite dal PageController tramite il comando:
+Route::get('{any?}', 'PageController@index')->where('any','.*');

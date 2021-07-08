@@ -24,6 +24,8 @@ class PostController extends Controller
         // $posts = Post::all(); // metodo 1
         // return response()->json($data);
 
+
+        // restituisce una query con i dati specificati in select
         $posts = DB::table('posts') // metodo 2
         // seleziono solo le colonne che mi interessa vedere
         ->select(
@@ -34,13 +36,16 @@ class PostController extends Controller
             'categories.name as category'
         )
         ->join('categories', 'posts.category_id', 'categories.id') // join con la tabella categories
-        ->get();
+        // ->get(); // restituisce tutto
+        ->paginate(3); // restituisce 3 risultati per pagina
 
+        // è possibile fare le jopin in questo modo
+        // con with si passa la proprietà della join prensente nel Model
+        // il risultato sono una serie di elementi annidati
+        //$posts = Post::with(['category','tags'])->paginate(3);
 
         return response()->json($posts);
         // nell'url inserisci e guarda-> http://127.0.0.1:8000/api/posts
-
-
     }
 
     /**

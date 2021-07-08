@@ -2,9 +2,18 @@
 
 @section('content')
     <div class="container">
-        <h1>
-            {{ $post->title}}
-        </h1>
+
+        <div class="d-flex justify-content-start">
+            <h1 class="mr-1">
+                {{ $post->title }}
+            </h1>
+
+            <div>
+                @foreach ($post->tags as $tag )
+                    <span class="badge badge-primary">{{ $tag->name }}</span>
+                @endforeach
+            </div>
+        </div>
 
         <h3>
             @if($post->category)
@@ -15,12 +24,6 @@
             </h3>
 
         <p>{{ $post->content }}</p>
-
-        <div>
-            @foreach ($post->tags as $tag )
-                <span class="badge badge-primary">{{ $tag->name }}</span>
-            @endforeach
-        </div>
 
         <div>
             <a class="btn btn-info" href="{{ route('admin.posts.edit', $post) }}">EDIT</a>

@@ -1,2 +1,2 @@
 require('./bootstrap');
-console.log('admin');
+console.log('hello admin');

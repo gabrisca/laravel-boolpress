@@ -8,12 +8,22 @@
     {{-- bootstrap --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
     <title>Boolpress</title>
+    <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 
 <body>
-    <div
+
+
+    <h1>Boolpress</h1>
+        <div id="app">
+
+        </div>
+
+
+
+
+    {{-- <div
         style="background-image: url({{ asset('img/bg-2.jpg') }}); background-repeat: no-repeat; background-size: cover; height: 100vh;"
     >
         <div style="background-color:white" class="d-flex justify-content-between align-items-center p-1">
@@ -30,8 +40,8 @@
                 </div>
             </div>
         </div>
-    </div>
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    </div> --}}
+
 </body>
 
 </html>
