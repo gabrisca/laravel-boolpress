@@ -1,9 +1,11 @@
 window.Vue = require('vue');
 
 import App from './App.vue';
+import router from './routes'; // importo router.js
 
 const app = new Vue({
     el: '#app',
+    router, // prendo il router
     render: h => h(App)
 });
 

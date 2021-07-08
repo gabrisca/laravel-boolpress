@@ -3,5 +3,45 @@ import VueRouter from 'vue-router'; // importo vueRouter
 
 Vue.use(VueRouter); // usa VueRouter
 
-//creiamo l'oggetto Router
-const
+//importo le pagine
+import Home from './pages/Home.vue';
+import About from './pages/About.vue';
+import Blog from './pages/Blog.vue';
+import Contact from './pages/Contact.vue';
+import Error404 from './pages/Error404.vue';
+
+
+
+//creiamo la classe Router
+const router = new VueRouter({
+    mode: 'history', // tiene in memoria la navigazione nel browser
+    routes: [
+        {
+            path: '/',
+            name: 'home', // serve per richiamare la rotta
+            component: Home
+        },
+        {
+            path: '/about',
+            name: 'about', // serve per richiamare la rotta
+            component: About
+        },
+        {
+            path: '/blog',
+            name: 'blog', // serve per richiamare la rotta
+            component: Blog
+        },
+        {
+            path: '/contacts',
+            name: 'contacts', // serve per richiamare la rotta
+            component: Contact
+        },
+        {
+            path: '/*', // * tutte le altre rotte
+            // name: 'error404', // serve per richiamare la rotta
+            component: Error404
+        },
+    ]
+})
+
+export default router; // esporto router

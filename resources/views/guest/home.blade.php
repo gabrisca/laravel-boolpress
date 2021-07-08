@@ -15,10 +15,10 @@
 <body>
 
 
-    <h1>Boolpress</h1>
-        <div id="app">
+    {{-- <h1>Boolpress</h1> --}}
+    <div id="app">
 
-        </div>
+    </div>
 
 
 
