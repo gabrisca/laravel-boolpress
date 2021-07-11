@@ -8,6 +8,7 @@ import Home from './pages/Home.vue';
 import About from './pages/About.vue';
 import Blog from './pages/Blog.vue';
 import Contact from './pages/Contact.vue';
+import PostDetail from './pages/PostDetail.vue';
 import Error404 from './pages/Error404.vue';
 
 
@@ -38,8 +39,13 @@ const router = new VueRouter({
             component: Contact
         },
         {
+            path: '/post/:slug', // parametro slug di post
+            name: 'postDetail', // serve per richiamare la rotta
+            component: PostDetail
+        },
+        {
             path: '/*', // * tutte le altre rotte
-            // name: 'error404', // serve per richiamare la rotta
+            name: 'error404', // serve per richiamare la rotta
             component: Error404
         },
     ]

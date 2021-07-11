@@ -4,29 +4,23 @@
         <div>
             <!-- loader -->
             <div v-if="!loaded" class="text-center mt-5">
-                <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                <Loader />
+                <!-- <div class="lds-ring"><div></div><div></div><div></div><div></div></div> -->
+            <!-- messo in un pagina a parte -->
             </div>
 
             <!-- wrapper posts -->
             <div v-if="loaded">
                 <!-- lista posts -->
-                <div
+                <Card
                     v-for="post in posts"
                     :key="'p' + post.id"
-                    class="card mb-3"
-                >
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                            <h5 class="card-title">{{ post.title }}</h5>
-                            <span class="badge badge-success custom-badge">{{
-                                post.category
-                            }}</span>
-                        </div>
-                        <i>{{ formatDate(post.date) }}</i>
-                        <p class="card-text">{{ post.content }}</p>
-                        <a href="#" class="btn btn-primary">Vai</a>
-                    </div>
-                </div>
+                    :title="post.title"
+                    :category="post.category"
+                    :date="FormatDate.format(post.date)"
+                    :content="post.content"
+                    :slug="post.slug"
+                />
 
                 <!-- paginazione -->
                 <div>
@@ -80,11 +74,20 @@
 
 <script>
 import axios from "axios";
+import Loader from '../components/Loader.vue';
+import Card from '../components/Card.vue';
+import FormatDate from '../classes/FormatDate';
+
 export default {
     name: "Blog",
+    components:{
+        Loader,
+        Card,
+    },
     data() {
         return {
             posts: [],
+            FormatDate,
             pagination: {},
             loaded: false
         };
@@ -111,15 +114,15 @@ export default {
                     console.log(err);
                 });
         },
-        formatDate(date) {
-            let d = new Date(date);
-            let dy = d.getDate();
-            let m = d.getMonth() + 1;
-            let y = d.getFullYear();
-            if (dy < 10) dy = "0" + dy;
-            if (m < 10) m = "0" + m;
-            return `${dy}/${m}/${y}`;
-        }
+        // formatDate(date) {
+        //     let d = new Date(date);
+        //     let dy = d.getDate();
+        //     let m = d.getMonth() + 1;
+        //     let y = d.getFullYear();
+        //     if (dy < 10) dy = "0" + dy;
+        //     if (m < 10) m = "0" + m;
+        //     return `${dy}/${m}/${y}`;
+        // } sostituita dalla classe FormatDate
     },
     created() {
         this.getPosts();
@@ -131,44 +134,4 @@ export default {
 #blog {
     height: 80vh;
     }
-.custom-badge {
-    display: inline-block;
-    height: 2rem;
-    line-height: 2rem;
-}
-.lds-ring {
-  display: inline-block;
-  position: relative;
-  width: 80px;
-  height: 80px;
-}
-.lds-ring div {
-  box-sizing: border-box;
-  display: block;
-  position: absolute;
-  width: 64px;
-  height: 64px;
-  margin: 8px;
-  border: 8px solid rgba(42, 22, 221, 0.63);
-  border-radius: 50%;
-  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: rgb(50, 136, 206) transparent transparent transparent;
-}
-.lds-ring div:nth-child(1) {
-  animation-delay: -0.45s;
-}
-.lds-ring div:nth-child(2) {
-  animation-delay: -0.3s;
-}
-.lds-ring div:nth-child(3) {
-  animation-delay: -0.15s;
-}
-@keyframes lds-ring {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
 </style>
